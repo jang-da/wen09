@@ -1,0 +1,133 @@
+/* 기본 스타일 초기화 */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* 스크롤 방지 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #000;
+}
+
+#intro-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 상단 패널 */
+#panelTop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: #0d9488; /* Tailwind teal-600 */
+    z-index: 20;
+    overflow: hidden;
+}
+
+/* 하단 패널 */
+#panelBottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: #0d9488; /* Tailwind teal-600 */
+    z-index: 20;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 1rem;
+}
+
+/* 1단계 텍스트 (초대 문구) */
+.text-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 4rem;
+}
+
+#text1, #text2 {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+}
+#text1 {
+    margin-bottom: 0.75rem;
+}
+
+/* 2단계 텍스트 (CODE / PROJECT) */
+#textContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    z-index: 40;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 2rem;
+    pointer-events: none;
+}
+
+.final-text-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+#codeText, #projectText {
+    color: white;
+}
+#slashText {
+    color: #e5e7eb; /* gray-200 */
+}
+
+/* 로딩 관련 요소 */
+#loadingPercentage {
+    font-size: 0.875rem;
+    font-family: monospace;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#loadingContainer {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: 30;
+}
+
+.loading-bg {
+    height: 1px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#loadingBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 0%; /* 시작 너비 */
+    background-color: white;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .text-wrapper {
+        padding: 2.5rem;
+    }
+    #text1, #text2 {
+        font-size: 1.875rem;
+    }
+}

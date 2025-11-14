@@ -86,7 +86,7 @@ function initializeParticles() {
 // 1초에 약 60번 반복 실행되는 애니메이션 루프
 function draw() {
   // 매 프레임마다 배경을 어둡게 칠해 잔상을 만듭니다. (0~255 사이)
-  background(10, 10, 20, 100);
+  background(0, 100); // 검은색 배경에 잔상 효과를 위해 alpha 값을 100으로 설정
 
   // 모든 파동을 업데이트합니다.
   for (let i = ripples.length - 1; i >= 0; i--) {
