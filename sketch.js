@@ -10,10 +10,10 @@ const BREAKPOINT = 768; // 모바일/데스크탑 반응형 분기점
 // setup() 전에 실행되어 이미지 등 미디어 파일을 미리 로드합니다.
 function preload() {
   // 데스크톱 이미지를 로드합니다.
-  desktopImg = loadImage('logo7.png');
+  desktopImg = loadImage('gnbimg/logo7.png');
 
   // 모바일 이미지를 로드하되, 파일이 없을 경우를 대비합니다.
-  const mobileImgPath = 'logo7-mobile.png';
+  const mobileImgPath = 'gnbimg/logo7-mobile.png';
   const loadCallback = (loadedImg) => {
     mobileImg = loadedImg; // 로딩 성공 시 변수에 할당
     console.log(`${mobileImgPath} 로드 성공.`);
@@ -61,7 +61,7 @@ function initializeParticles() {
   
   // 파티클 밀도 설정 (모바일에서 더 촘촘하게)
   // stepSize 값이 클수록 파티클 밀도가 낮아집니다.
-  const stepSize = window.innerWidth < BREAKPOINT ? 15 : 24; // 데스크톱 밀도를 24 -> 30으로 변경하여 파티클 수를 줄임
+  const stepSize = window.innerWidth < BREAKPOINT ? 12 : 24; // 데스크톱 밀도를 24 -> 30으로 변경하여 파티클 수를 줄임
 
   // 스케일링된 이미지를 캔버스 중앙에 배치하기 위한 시작점을 계산합니다.
   const startX = (width - scaledWidth) / 2;
@@ -182,6 +182,11 @@ class Particle {
     this.char = random() > 0.5 ? "0" : "1";
     this.maxSpeed = 3; // 최대 속도
     this.maxForce = 0.2; // 최대 힘 (방향 전환)
+
+    // --- 폰트 크기 설정 ---
+    this.baseSize = 12;       // 1. 기본 폰트 크기
+    this.rippleEffectSize = 16; // 2. 파동이 닿았을 때 추가되는 최대 크기
+    // -----------------------
   }
 
   // 파티클의 물리적 움직임을 계산합니다.
@@ -227,7 +232,7 @@ class Particle {
 
   // 파티클을 화면에 그립니다.
   show() {
-    let size = 14;    // 기본 문자 크기
+    let size = this.baseSize; // 기본 문자 크기
     let shakeX = 0;   // 기본 흔들림을 0으로 설정하여 안정화
     let shakeY = 0;   // 기본 흔들림을 0으로 설정하여 안정화
 
@@ -245,7 +250,7 @@ class Particle {
         let effect = 1 - (sqrt(dSq) - r.radius) / r.rippleWidth;
         
         // 크기와 흔들림 값을 적용합니다.
-        size += 10 * effect; // 최대 10만큼 크기 증가
+        size += this.rippleEffectSize * effect; // 최대 크기 증가
         shakeX = random(-5, 5) * effect;
         shakeY = random(-5, 5) * effect;
       }

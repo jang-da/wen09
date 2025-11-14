@@ -4,12 +4,15 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* 반투명 검은색 배경으로 변경 */
+  /* 블러 효과를 위해 배경색 투명도를 조정합니다. */
+  background-color: rgba(0, 0, 0, 0.5); 
+  -webkit-backdrop-filter: blur(10px); /* Safari 호환성을 위한 접두사 */
+  backdrop-filter: blur(8px); /* 배경 블러 효과 */
   z-index: 1000; /* 다른 요소들 위에 오도록 설정 */
   box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
   /* 경계선 두께를 0.5px로 설정하고, 그림자 효과도 transition에 추가합니다. */
   border-bottom: 0.5px solid transparent;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 /* GNB 내부 콘텐츠 컨테이너 */
@@ -52,6 +55,7 @@
 
 /* 스크롤 시 GNB 스타일 */
 .gnb.scrolled {
+  background-color: rgba(0, 0, 0, 0.7); /* 스크롤 시 배경을 약간 더 어둡게 */
   /* 스크롤 시 테마 색상 경계선과 함께 은은한 그림자 효과를 추가합니다. */
   border-bottom-color: #A8D5E2; /* 테마 색상(연한 하늘색)으로 변경 */
   box-shadow: 0px 4px 12px rgba(168, 213, 226, 0.2); /* 그림자 색상도 테마에 맞게 변경 */
