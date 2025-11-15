@@ -61,7 +61,7 @@ function initializeParticles() {
   
   // 파티클 밀도 설정 (모바일에서 더 촘촘하게)
   // stepSize 값이 클수록 파티클 밀도가 낮아집니다.
-  const stepSize = window.innerWidth < BREAKPOINT ? 12 : 24; // 데스크톱 밀도를 24 -> 30으로 변경하여 파티클 수를 줄임
+  const stepSize = window.innerWidth < BREAKPOINT ? 60 : 26; // 모바일(12->18), 데스크톱(24->30) 밀도 조정
 
   // 스케일링된 이미지를 캔버스 중앙에 배치하기 위한 시작점을 계산합니다.
   const startX = (width - scaledWidth) / 2;

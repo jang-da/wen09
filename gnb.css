@@ -60,3 +60,34 @@
   border-bottom-color: #A8D5E2; /* 테마 색상(연한 하늘색)으로 변경 */
   box-shadow: 0px 4px 12px rgba(168, 213, 226, 0.2); /* 그림자 색상도 테마에 맞게 변경 */
 }
+
+/* --- 반응형 레이아웃 (모바일 & 태블릿) --- */
+/* 화면 너비가 1279px 이하일 때 GNB 로고 및 아이콘 크기를 조정합니다. */
+@media (max-width: 1279px) {
+  .gnb-inner {
+    padding: 10px 24px; /* 모바일 화면에서 좌우 여백을 줄입니다. */
+  }
+  .gnb .logo {
+    height: 50px; /* 로고 높이를 50px로 줄입니다. */
+  }
+  .nav-icon {
+    height: 26px; /* 메뉴 아이콘 높이를 28px로 줄입니다. */
+  }
+}
+
+/* --- 반응형 레이아웃 (소형 모바일) --- */
+/* 화면 너비가 375px 이하일 때 GNB 요소 크기를 추가로 조정합니다. */
+@media (max-width: 375px) {
+  .gnb-inner {
+    padding: 10px 16px; /* 좌우 여백을 더 줄입니다. */
+  }
+  .gnb .logo {
+    height: 40px; /* 로고 높이를 40px로 줄입니다. */
+  }
+  .nav-icon {
+    height: 20px; /* 메뉴 아이콘 높이를 24px로 줄입니다. */
+  }
+  .gnb-right {
+    gap: 20px; /* 메뉴 아이템 사이 간격을 20px로 줄입니다. */
+  }
+}

@@ -42,7 +42,7 @@
             box-sizing: border-box;
         }
         .frame-52 {
-            height: 2400px; /* 모든 콘텐츠를 포함할 수 있도록 높이를 충분히 늘림 */
+            height: 2600px; /* 모든 콘텐츠를 포함할 수 있도록 높이를 2600px로 늘림 */
             position: relative; /* 자식 요소의 absolute 포지셔닝 기준 */
             overflow: hidden; /* 내부 요소가 넘칠 경우 숨김 */
             /* 디자인 시안의 기준 너비로 추정 */
@@ -66,7 +66,7 @@
             font-size: 24px;
             font-weight: 400;
             position: absolute;
-            left: 1063px;
+            left: 55.3%;
             top: 320.99px;
         }
         .about-subtitle {
@@ -76,7 +76,7 @@
             font-size: 44.81px;
             font-weight: 400;
             position: absolute;
-            left: 1063px;
+            left: 55.3%;
             top: 365px;
         }
         .encoding {
@@ -86,7 +86,7 @@
             font-size: 24px;
             font-weight: 400;
             position: absolute;
-            left: 1516px;
+            left: 79%;
             top: 410px;
         }
         .about-subtitle-2 {
@@ -96,7 +96,7 @@
             font-size: 44.81px;
             font-weight: 400;
             position: absolute;
-            left: 1322px;
+            left: 68.8%;
             top: 459px;
         }
         .about-description {
@@ -107,16 +107,16 @@
             line-height: 160%;
             font-weight: 400;
             position: absolute;
-            left: 1023px;
+            left: 53.2%;
             top: 568.24px;
-            width: 598px;
+            width: 31.1%;
         }
         .rectangle-98 {
             /* background 속성은 img 태그에 불필요하므로 제거합니다. */
             width: 4px; /* 애니메이션 시작을 위해 너비를 작게 설정 */
             height: 4px; /* 애니메이션 시작을 위해 높이를 작게 설정 */
             position: absolute;
-            left: 364px;
+            left: 19%; /* 1920px 기준 364px -> 19%로 변경하여 반응형 대응 */
             top: 263px;
             object-fit: cover; /* 이미지가 비율을 유지하며 영역을 꽉 채우도록 설정 */
             transform-origin: top left; /* 애니메이션 기준점을 왼쪽 상단으로 설정 */
@@ -139,11 +139,11 @@
             justify-content: flex-start;
             position: absolute;
         }
-        .info-category.committee { width: 139px; left: 769px; top: 1483px; }
-        .info-category.web-team { width: 139px; left: 769px; top: 1887px; }
-        .info-category.small-banner-team { left: 1052px; top: 1887px; }
-        .info-category.large-banner-team { width: 139px; left: 1335px; top: 1887px; }
-        .info-category.video-team { left: 1618px; top: 1887px; }
+        .info-category.committee { left: 40%; top: 1483px; }
+        .info-category.web-team { width: 139px; left: 40%; top: 1887px; }
+        .info-category.small-banner-team { left: 54.8%; top: 2100px; }
+        .info-category.large-banner-team { left: 69.5%; top: 2100px; }
+        .info-category.video-team { left: 84.2%; top: 2100px; }
 
         .info-title {
             color: #8dd7eb;
@@ -177,31 +177,70 @@
         .info-subtitle { color: #bcd7de; font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif; font-weight: 500; font-size: 25.17px; position: relative; }
         .member-list.short { width: 70.12px; }
 
+        /* --- 반응형 레이아웃 (대형 노트북) --- */
+        /* 화면 너비가 1600px 이하일 때 적용됩니다. */
+        @media (max-width: 1600px) {
+            .about-description {
+                left: 55.3%;
+                width: 40%;
+            }
+            .encoding { left: auto; right: 5%; }
+            .about-subtitle-2 { left: auto; right: 5%; }
+
+            .info-category.small-banner-team { left: 58%; }
+            .info-category.large-banner-team { left: 76%; }
+            .info-category.video-team { left: auto; right: 5%; }
+        }
+
         /* --- 반응형 레이아웃 (모바일 & 태블릿) --- */
         /* 화면 너비가 1279px 이하일 때 적용됩니다. */
         @media (max-width: 1279px) {
             .frame-52 {
-                height: auto; /* 콘텐츠 높이에 맞춰 자동 조절 */
+                /* 1. 데스크톱의 고정 높이를 해제하고, flex 컨테이너로 변경합니다. */
+                height: auto !important;
                 padding: 0 24px; /* 좌우 여백 추가 */
+                display: flex;
+                flex-direction: column;
+                /* flex 자식 요소들을 수평 중앙 정렬합니다. */
+                align-items: center;
             }
 
-            /* 모든 절대 위치 요소를 상대 위치로 변경하여 세로로 쌓이게 합니다. */
-            .about, .decoding, .about-subtitle, .encoding, .about-subtitle-2, .about-description, .info, .info-category {
-                position: relative;
-                left: auto;
-                top: auto;
+            /* 2. 데스크톱의 절대 위치 스타일을 강제로 덮어씁니다. */
+            .about,
+            .decoding,
+            .about-subtitle,
+            .encoding,
+            .about-subtitle-2,
+            .about-description,
+            .rectangle-98,
+            .info,
+            .info-category {
+                position: relative !important;
+                left: auto !important;
+                top: auto !important;
+                right: auto !important;
                 width: auto;
                 margin-bottom: 20px; /* 요소 간 간격 추가 */
             }
+            
+            /* Flexbox 순서 조정 */
+            .about { order: 1; }
+            .decoding { order: 2; }
+            .about-subtitle { order: 3; }
+            .encoding { order: 4; }
+            .about-subtitle-2 { order: 5; }
+            .about-description { order: 6; }
+            .rectangle-98 { order: 7; }
+            .info { order: 8; }
+            /* 모든 info-category가 info 다음에 오도록 순서 지정 */
+            .info-category { order: 9; }
 
             /* 폰트 크기 조정 */
             .about, .info {
                 font-size: 15vw; /* 화면 너비에 비례하는 폰트 크기 */
-                margin-top: 80px;
             }
             .about-subtitle, .about-subtitle-2 {
                 font-size: 8vw;
-                margin-top: 40px;
             }
             .decoding, .encoding {
                 font-size: 5vw;
@@ -209,21 +248,23 @@
             .about-description {
                 font-size: 4vw;
                 line-height: 1.6;
-                margin-top: 40px;
             }
 
             /* 포스터 이미지 위치 및 크기 조정 */
             .rectangle-98 {
-                left: 50%; /* 중앙 정렬을 위해 왼쪽에서 50% 이동 */
-                transform: translateX(-50%); /* 자신의 너비의 50%만큼 왼쪽으로 이동하여 완벽 중앙 정렬 */
-                top: 120px; /* 상단 여백 조정 */
-                margin-top: 60px;
-                margin-bottom: 60px;
+                width: 90%; /* 너비를 90%로 설정하여 좌우 여백 확보 */
+                height: auto; /* 높이는 비율에 맞게 자동 조절 */
+                display: block; /* margin: auto를 적용하기 위해 블록 요소로 변경 */
+                margin: 60px auto; /* 상하 60px, 좌우 자동 마진으로 중앙 정렬 */
             }
 
             /* Info 섹션 조정 */
             .info-category {
                 margin-bottom: 60px; /* 팀별 간격 추가 */
+                align-items: center; /* 내부 콘텐츠 중앙 정렬 */
+            }
+            .member-list {
+                align-items: center; /* 멤버 리스트 중앙 정렬 */
             }
             .info-title, .info-subtitle {
                 font-size: 6vw;
@@ -231,13 +272,17 @@
             .member-name {
                 font-size: 5vw;
             }
+            .member-name { white-space: nowrap; } /* 이름이 줄바꿈되지 않도록 설정 */
+        }
 
-            /* GNB 로고 및 아이콘 크기 조정 */
-            .gnb .logo {
-                height: 50px;
+        /* --- 반응형 레이아웃 (소형 모바일) --- */
+        /* 화면 너비가 425px 이하일 때 적용됩니다. */
+        @media (max-width: 425px) {
+            .frame-52 {
+                padding: 0 16px; /* 좌우 여백을 더 줄입니다. */
             }
-            .nav-icon {
-                height: 28px;
+            .rectangle-98 {
+                margin: 40px auto; /* 상하 여백을 줄입니다. */
             }
         }
     </style>
@@ -250,8 +295,8 @@
           <a href="index.html"><img src="gnbimg/logo7.png" alt="Logo" class="logo"></a>
         </div>
         <nav class="gnb-right">
-          <a href="#"><img src="gnbimg/projects.png" alt="Project" class="nav-icon"></a>
-          <a href="#"><img src="gnbimg/artist.png" alt="Artist" class="nav-icon"></a>
+          <a href="project.html"><img src="gnbimg/projects.png" alt="Project" class="nav-icon"></a>
+          <a href="profile.html"><img src="gnbimg/artist.png" alt="Artist" class="nav-icon"></a>
         </nav>
       </div>
     </header>
@@ -358,16 +403,11 @@
             }
         })
         .to(".rectangle-98", {
-            // 1단계: 이미지가 세로로 길어집니다. (모바일 크기 고려)
-            height: () => window.innerWidth < 1280 ? "60vw" : "664px",
+            // 이미지가 원래 비율을 유지하며 가로로 펼쳐집니다.
+            width: () => window.innerWidth < 1280 ? "90%" : "466px",
+            height: 'auto', // 높이를 자동으로 설정하여 비율을 유지합니다.
             ease: "power1.inOut",
-            duration: 0.8 // 0.8초 동안 진행
-        })
-        .to(".rectangle-98", {
-            // 2단계: 이미지가 가로로 펼쳐집니다. (모바일 크기 고려)
-            width: () => window.innerWidth < 1280 ? "85vw" : "466px",
-            ease: "power1.inOut",
-            duration: 1 // 1초 동안 진행
+            duration: 1.2 // 애니메이션 시간을 약간 늘려 부드럽게 만듭니다.
         });
 
         // --- GNB 스크롤 효과 스크립트 ---
