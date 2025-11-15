@@ -113,13 +113,15 @@
         }
         .rectangle-98 {
             /* background 속성은 img 태그에 불필요하므로 제거합니다. */
-            width: 4px; /* 애니메이션 시작을 위해 너비를 작게 설정 */
-            height: 4px; /* 애니메이션 시작을 위해 높이를 작게 설정 */
+            width: 466px; /* 1. 최종 데스크톱 너비 설정 */
+            height: auto; /* 비율 유지를 위해 auto로 설정 */
             position: absolute;
             left: 19%; /* 1920px 기준 364px -> 19%로 변경하여 반응형 대응 */
             top: 263px;
             object-fit: cover; /* 이미지가 비율을 유지하며 영역을 꽉 채우도록 설정 */
             transform-origin: top left; /* 애니메이션 기준점을 왼쪽 상단으로 설정 */
+            transform: scale(0.01); /* 2. 초기 상태를 '아주 작게' 설정 */
+            will-change: transform; /* 3. 브라우저에 애니메이션 힌트 제공 */
         }
         .info {
             color: #bcd7de;
@@ -130,7 +132,7 @@
             position: absolute;
             left: 190px;
             top: 1264px;
-        }
+        } 
         .info-category {
             display: flex;
             flex-direction: column;
@@ -140,7 +142,7 @@
             position: absolute;
         }
         .info-category.committee { left: 40%; top: 1483px; }
-        .info-category.web-team { width: 139px; left: 40%; top: 1887px; }
+        .info-category.web-team { width: 139px; left: 40%; top: 2100px; }
         .info-category.small-banner-team { left: 54.8%; top: 2100px; }
         .info-category.large-banner-team { left: 69.5%; top: 2100px; }
         .info-category.video-team { left: 84.2%; top: 2100px; }
@@ -252,10 +254,12 @@
 
             /* 포스터 이미지 위치 및 크기 조정 */
             .rectangle-98 {
-                width: 90%; /* 너비를 90%로 설정하여 좌우 여백 확보 */
+                width: 90%; /* 모바일에서는 너비를 90%로 덮어쓰기 */
                 height: auto; /* 높이는 비율에 맞게 자동 조절 */
                 display: block; /* margin: auto를 적용하기 위해 블록 요소로 변경 */
                 margin: 60px auto; /* 상하 60px, 좌우 자동 마진으로 중앙 정렬 */
+                /* 모바일에서는 transform을 사용하지 않으므로 초기화 */
+                transform: none; 
             }
 
             /* Info 섹션 조정 */
@@ -403,11 +407,10 @@
             }
         })
         .to(".rectangle-98", {
-            // 이미지가 원래 비율을 유지하며 가로로 펼쳐집니다.
-            width: () => window.innerWidth < 1280 ? "90%" : "466px",
-            height: 'auto', // 높이를 자동으로 설정하여 비율을 유지합니다.
+            // width/height 대신 scale(transform)을 애니메이션합니다.
+            scale: 1,
             ease: "power1.inOut",
-            duration: 1.2 // 애니메이션 시간을 약간 늘려 부드럽게 만듭니다.
+            duration: 1.2 
         });
 
         // --- GNB 스크롤 효과 스크립트 ---

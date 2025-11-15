@@ -40,9 +40,9 @@ function setup() {
 
   // --- 자동 파동 생성 로직 추가 ---
   // 3개의 자동 파동을 서로 다른 시간 간격으로 생성하여 불규칙한 느낌을 줍니다.
-  setInterval(createAutoRipple, 2000);  // 2초마다
-  setInterval(createAutoRipple, 2700);  // 2.7초마다
-  setInterval(createAutoRipple, 3500);  // 3.5초마다
+  // setInterval(createAutoRipple, 2000);  // 2초마다 (주석 처리하여 파동 수 줄임)
+  // setInterval(createAutoRipple, 2700);  // 2.7초마다 (주석 처리하여 파동 수 줄임)
+  setInterval(createAutoRipple, 6000);  // 4초마다 파동을 생성하여 빈도를 줄입니다.
 }
 
 // 이미지의 픽셀을 분석하여 파티클을 생성하는 함수
@@ -61,7 +61,7 @@ function initializeParticles() {
   
   // 파티클 밀도 설정 (모바일에서 더 촘촘하게)
   // stepSize 값이 클수록 파티클 밀도가 낮아집니다.
-  const stepSize = window.innerWidth < BREAKPOINT ? 60 : 26; // 모바일(12->18), 데스크톱(24->30) 밀도 조정
+  const stepSize = window.innerWidth < BREAKPOINT ? 60 : 35; // 데스크톱 stepSize를 30 -> 35로 늘려 파티클 수를 더 줄임
 
   // 스케일링된 이미지를 캔버스 중앙에 배치하기 위한 시작점을 계산합니다.
   const startX = (width - scaledWidth) / 2;
@@ -164,7 +164,7 @@ function createAutoRipple() {
     x: random(width),      // 캔버스 너비 내의 랜덤 x좌표
     y: random(height),     // 캔버스 높이 내의 랜덤 y좌표
     radius: 0,
-    speed: random(2, 5),   // 자동 파동은 약간 느린 속도로 설정
+    speed: random(3, 3),   // 자동 파동은 약간 느린 속도로 설정
     rippleWidth: 15        // 자동 파동의 두께
   });
 }
@@ -196,21 +196,8 @@ class Particle {
 
   // 파티클의 위치를 업데이트합니다.
   update() {
-    // --- 1. 상호작용: 마우스 피하기 ---
-    let mouse = createVector(mouseX, mouseY);
-    let d = this.pos.dist(mouse); // 마우스와의 거리
+    // --- 1. 상호작용: 마우스 피하기 (성능 개선을 위해 관련 코드를 제거했습니다) ---
     
-    if (d < 80) { // 마우스가 80px 반경 안에 들어오면
-      // [오류 수정] d가 0에 가까워져서 Infinity가 되는 것을 방지합니다.
-      if (d < 1) {
-        d = 1; // 최소 거리를 1로 설정
-      }
-      // 마우스 반대 방향으로 밀어내는 힘을 계산합니다.
-      let repelForce = p5.Vector.sub(this.pos, mouse);
-      repelForce.setMag(5 / d); // 거리가 가까울수록 강하게 밀어냄
-      this.applyForce(repelForce);
-    }
-
     // --- 2. 복귀: 원래 위치로 돌아가기 ---
     // 파티클이 원래 위치(home)로 돌아가려는 힘 (스프링처럼)
     let homeForce = p5.Vector.sub(this.home, this.pos);
