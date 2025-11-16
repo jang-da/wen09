@@ -36,206 +36,206 @@
             position: relative;
             z-index: 1;
         }
-        /* 제공된 CSS */
+
+        /* --- 전체 레이아웃 --- */
         .frame-52,
         .frame-52 * {
             box-sizing: border-box;
         }
         .frame-52 {
-            height: 2600px; /* 모든 콘텐츠를 포함할 수 있도록 높이를 2600px로 늘림 */
-            position: relative; /* 자식 요소의 absolute 포지셔닝 기준 */
-            overflow: hidden; /* 내부 요소가 넘칠 경우 숨김 */
-            /* 디자인 시안의 기준 너비로 추정 */
-            max-width: 1920px; 
+            /* Flexbox 컨테이너로 변경 */
+            display: flex;
+            flex-direction: column;
+            gap: 150px; /* 섹션 간의 간격 */
+            max-width: 1920px;
             margin: 0 auto;
+            padding: 80px 10%; /* 상하, 좌우 여백 */
         }
+
+        /* --- About 섹션 --- */
+        .about-section {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+        }
+
+        .about-columns {
+            display: flex;
+            gap: 5%;
+            align-items: flex-start;
+        }
+
         .about {
             color: #ffffff;
-            text-align: left;
             font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif;
             font-size: 92.44px;
             font-weight: 400;
-            position: absolute;
-            left: 190px;
-            top: 53px;
+            /* margin-bottom 제거, 부모의 gap으로 간격 조절 */
         }
+
+        /* .about-content는 더 이상 필요 없으므로 제거하거나 다른 용도로 사용할 수 있습니다. */
+        /* .about-content { ... } */
+
+
+        .about-text-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* 문구 그룹 간 간격 */
+            /* width 속성 제거 */
+            flex: 1; /* 남은 공간을 모두 차지하도록 설정 */
+            align-self: stretch;
+        }
+
+        .about-text-row {
+            display: flex;
+            flex-direction: column; /* 세로로 배치 */
+            align-items: flex-start; /* 왼쪽 정렬 */
+            gap: 8px; /* 텍스트 사이 간격 추가 */
+        }
+
+        .about-text-row.align-right {
+            align-items: flex-end; /* 오른쪽 정렬 */
+        }
+
         .decoding {
             color: #ffffff;
-            text-align: left;
             font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif;
             font-size: 24px;
             font-weight: 400;
-            position: absolute;
-            left: 55.3%;
-            top: 320.99px;
         }
+
         .about-subtitle {
             color: #ffffff;
-            text-align: left;
             font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif;
             font-size: 44.81px;
             font-weight: 400;
-            position: absolute;
-            left: 55.3%;
-            top: 365px;
         }
+
         .encoding {
             color: #ffffff;
-            text-align: left;
             font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif;
             font-size: 24px;
             font-weight: 400;
-            position: absolute;
-            left: 79%;
-            top: 410px;
         }
+
         .about-subtitle-2 {
             color: #ffffff;
-            text-align: left;
             font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif;
             font-size: 44.81px;
             font-weight: 400;
-            position: absolute;
-            left: 68.8%;
-            top: 459px;
         }
+
         .about-description {
             color: #ffffff;
-            text-align: left;
             font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif;
             font-size: 22.18px;
             line-height: 160%;
             font-weight: 400;
-            position: absolute;
-            left: 53.2%;
-            top: 568.24px;
-            width: 31.1%;
+            margin-top: 60px; /* 위쪽 문구 그룹과의 간격 */
         }
+
         .rectangle-98 {
-            /* background 속성은 img 태그에 불필요하므로 제거합니다. */
-            width: 466px; /* 1. 최종 데스크톱 너비 설정 */
+            flex-shrink: 0; /* 이미지가 줄어들지 않도록 설정 */
+            width: 30%; /* 이미지 너비를 30%로 고정 */
+            /* flex: 1 및 width: 100% 제거 */
             height: auto; /* 비율 유지를 위해 auto로 설정 */
-            position: absolute;
-            left: 19%; /* 1920px 기준 364px -> 19%로 변경하여 반응형 대응 */
-            top: 263px;
             object-fit: cover; /* 이미지가 비율을 유지하며 영역을 꽉 채우도록 설정 */
             transform-origin: top left; /* 애니메이션 기준점을 왼쪽 상단으로 설정 */
-            transform: scale(0.01); /* 2. 초기 상태를 '아주 작게' 설정 */
-            will-change: transform; /* 3. 브라우저에 애니메이션 힌트 제공 */
+            transform: scale(0.01); /* 초기 상태를 '아주 작게' 설정 */
+            will-change: transform; /* 브라우저에 애니메이션 힌트 제공 */
         }
+
+        /* --- Info 섹션 --- */
+        .info-section {
+            display: flex;
+            flex-direction: column;
+        }
+
         .info {
             color: #bcd7de;
-            text-align: left;
             font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif;
             font-size: 92.44px;
             font-weight: 400;
-            position: absolute;
-            left: 190px;
-            top: 1264px;
-        } 
+            margin-bottom: 120px;
+        }
+
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap; /* 화면이 좁아지면 줄바꿈 */
+            gap: 60px 4%; /* 세로, 가로 간격 */
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
         .info-category {
             display: flex;
             flex-direction: column;
             gap: 60px;
             align-items: flex-start;
-            justify-content: flex-start;
-            position: absolute;
         }
-        .info-category.committee { left: 40%; top: 1483px; }
-        .info-category.web-team { width: 139px; left: 40%; top: 2100px; }
-        .info-category.small-banner-team { left: 54.8%; top: 2100px; }
-        .info-category.large-banner-team { left: 69.5%; top: 2100px; }
-        .info-category.video-team { left: 84.2%; top: 2100px; }
+        /* Flex 아이템 너비 설정 (가로 5개 배치 기준) */
+        .info-category.committee { flex-basis: 100%; } /* 졸업전시위원은 한 줄 전체 사용 */
+        .info-category.web-team { flex-basis: 16%; }
+        .info-category.small-banner-team { flex-basis: 16%; }
+        .info-category.large-banner-team { flex-basis: 16%; }
+        .info-category.video-team { flex-basis: 16%; }
 
         .info-title {
             color: #8dd7eb;
-            text-align: left;
             font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif;
             font-size: 25.17px;
             font-weight: 500;
-            position: relative;
         }
+
         .member-list {
             display: flex;
             flex-direction: column;
             gap: 11.69px;
             align-items: flex-start;
-            justify-content: flex-start;
-            flex-shrink: 0;
-            position: relative;
         }
+
         .member-name {
             color: rgba(188, 215, 222, 0.6);
-            text-align: left;
             font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif;
             font-size: 25.17px;
             line-height: 160%;
             font-weight: 400;
-            position: relative;
         }
+
         .member-name.variant-1 { color: #cde1e6; }
         .member-name.variant-2 { color: #bcd7de; }
 
-        .info-subtitle { color: #bcd7de; font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif; font-weight: 500; font-size: 25.17px; position: relative; }
-        .member-list.short { width: 70.12px; }
-
-        /* --- 반응형 레이아웃 (대형 노트북) --- */
-        /* 화면 너비가 1600px 이하일 때 적용됩니다. */
-        @media (max-width: 1600px) {
-            .about-description {
-                left: 55.3%;
-                width: 40%;
-            }
-            .encoding { left: auto; right: 5%; }
-            .about-subtitle-2 { left: auto; right: 5%; }
-
-            .info-category.small-banner-team { left: 58%; }
-            .info-category.large-banner-team { left: 76%; }
-            .info-category.video-team { left: auto; right: 5%; }
+        .info-subtitle {
+            color: #bcd7de;
+            font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif;
+            font-weight: 500;
+            font-size: 25.17px;
         }
+
 
         /* --- 반응형 레이아웃 (모바일 & 태블릿) --- */
         /* 화면 너비가 1279px 이하일 때 적용됩니다. */
         @media (max-width: 1279px) {
             .frame-52 {
-                /* 1. 데스크톱의 고정 높이를 해제하고, flex 컨테이너로 변경합니다. */
-                height: auto !important;
-                padding: 0 24px; /* 좌우 여백 추가 */
-                display: flex;
-                flex-direction: column;
-                /* flex 자식 요소들을 수평 중앙 정렬합니다. */
-                align-items: center;
+                padding: 60px 24px; /* 모바일용 여백 */
+                gap: 80px;
             }
 
-            /* 2. 데스크톱의 절대 위치 스타일을 강제로 덮어씁니다. */
-            .about,
-            .decoding,
-            .about-subtitle,
-            .encoding,
-            .about-subtitle-2,
-            .about-description,
-            .rectangle-98,
-            .info,
-            .info-category {
-                position: relative !important;
-                left: auto !important;
-                top: auto !important;
-                right: auto !important;
-                width: auto;
-                margin-bottom: 20px; /* 요소 간 간격 추가 */
+            /* About 섹션: 세로 배치로 변경 */
+            .about-section { gap: 40px; }
+            .about-columns {
+                flex-direction: column; /* HTML 순서대로 세로 배치 (이미지가 위) */
+                gap: 40px;
             }
-            
-            /* Flexbox 순서 조정 */
-            .about { order: 1; }
-            .decoding { order: 2; }
-            .about-subtitle { order: 3; }
-            .encoding { order: 4; }
-            .about-subtitle-2 { order: 5; }
-            .about-description { order: 6; }
-            .rectangle-98 { order: 7; }
-            .info { order: 8; }
-            /* 모든 info-category가 info 다음에 오도록 순서 지정 */
-            .info-category { order: 9; }
+            .about-text-group {
+                width: 100%;
+                align-self: initial; /* stretch 해제 */
+            }
+            .about { margin-bottom: 40px; }
+            .about-text-group {
+                width: 100%; /* 전체 너비 사용 */
+                align-self: initial; /* 오른쪽 정렬 해제 */
+            }
 
             /* 폰트 크기 조정 */
             .about, .info {
@@ -252,31 +252,28 @@
                 line-height: 1.6;
             }
 
-            /* 포스터 이미지 위치 및 크기 조정 */
+            /* 포스터 이미지 크기 및 위치 조정 */
             .rectangle-98 {
-                width: 90%; /* 모바일에서는 너비를 90%로 덮어쓰기 */
-                height: auto; /* 높이는 비율에 맞게 자동 조절 */
-                display: block; /* margin: auto를 적용하기 위해 블록 요소로 변경 */
-                margin: 60px auto; /* 상하 60px, 좌우 자동 마진으로 중앙 정렬 */
-                /* 모바일에서는 transform을 사용하지 않으므로 초기화 */
-                transform: none; 
+                width: 100%; /* 전체 너비 사용 */
+                transform: none; /* GSAP 애니메이션 비활성화 */
             }
 
             /* Info 섹션 조정 */
+            .info-grid {
+                flex-direction: column; /* 세로 배치 */
+                gap: 60px;
+            }
             .info-category {
-                margin-bottom: 60px; /* 팀별 간격 추가 */
-                align-items: center; /* 내부 콘텐츠 중앙 정렬 */
+                width: 100%;
             }
-            .member-list {
-                align-items: center; /* 멤버 리스트 중앙 정렬 */
-            }
+
             .info-title, .info-subtitle {
                 font-size: 6vw;
             }
             .member-name {
                 font-size: 5vw;
+                white-space: nowrap; /* 이름이 줄바꿈되지 않도록 설정 */
             }
-            .member-name { white-space: nowrap; } /* 이름이 줄바꿈되지 않도록 설정 */
         }
 
         /* --- 반응형 레이아웃 (소형 모바일) --- */
@@ -284,9 +281,6 @@
         @media (max-width: 425px) {
             .frame-52 {
                 padding: 0 16px; /* 좌우 여백을 더 줄입니다. */
-            }
-            .rectangle-98 {
-                margin: 40px auto; /* 상하 여백을 줄입니다. */
             }
         }
     </style>
@@ -310,67 +304,81 @@
     </section>
 
     <section id="main-content">
-        <div class="frame-52">
-            <div class="about">About</div>
-            <div class="decoding">Decoding</div>
-            <div class="about-subtitle">세상을 읽고</div>
-            <div class="encoding">Encoding</div>
-            <div class="about-subtitle-2">시각으로 답하다</div>
-            <div class="about-description">
-                세상은 수많은 이야기와 정보, 그리고 보이지 않는 문제들로 가득 찬 거대한
-                텍스트입니다. 저희는 그 텍스트를 읽고, 해석하고, 우리만의 언어로 새로운
-                의미를 만들어내는 사람들, 바로 시각 디자이너입니다.
-                <br />
-                <br />
-                이번 졸업 작품은 ‘세상을 그리는 방식’에 대한 저희의 대답입니다.
-                <br />
-                이는 단순히 아름다운 것을 만드는 행위를 넘어, 복잡한 세상을 이해하고 그
-                문제에 대한 해결책을 시각적으로 제안하는 과정에 대한 이야기입니다.
-            </div>
-            <img class="rectangle-98" src="mainimg/poster.webp" alt="mainimg/poster.webp">
-            <div class="info">Info</div>
-            <div class="info-category committee">
-                <div class="info-title">졸업전시위원</div>
-                <div class="member-list">
-                    <div class="member-name">김혜민</div>
-                    <div class="member-name">박성욱</div>
-                    <div class="member-name">박소현</div>
-                    <div class="member-name">윤해주</div>
-                    <div class="member-name variant-1">김영영</div>
+      <div class="frame-52">
+        <!-- About Section -->
+        <div class="about-section">
+            <h1 class="about">About</h1>
+            <div class="about-columns">
+                <img class="rectangle-98" src="mainimg/Artboard 1.webp" alt="Exhibition Poster">
+                <div class="about-text-group">
+                    <div class="about-text-row">
+                        <div class="decoding">Decoding</div>
+                        <div class="about-subtitle">세상을 읽고</div>
+                    </div>
+                    <div class="about-text-row align-right">
+                        <div class="encoding">Encoding</div>
+                        <div class="about-subtitle-2">시각으로 답하다</div>
+                    </div>
+                    <p class="about-description">
+                        세상은 수많은 이야기와 정보, 그리고 보이지 않는 문제들로 가득 찬 거대한
+                        텍스트입니다. 저희는 그 텍스트를 읽고, 해석하고, 우리만의 언어로 새로운
+                        의미를 만들어내는 사람들, 바로 시각 디자이너입니다.
+                        <br /><br />
+                        이번 졸업 작품은 ‘세상을 그리는 방식’에 대한 저희의 대답입니다.
+                        <br />
+                        이는 단순히 아름다운 것을 만드는 행위를 넘어, 복잡한 세상을 이해하고 그
+                        문제에 대한 해결책을 시각적으로 제안하는 과정에 대한 이야기입니다.
+                    </p>
                 </div>
             </div>
-            <div class="info-category web-team">
-                <div class="info-subtitle">웹</div>
-                <div class="member-list">
-                    <div class="member-name"></div>
-                    <div class="member-name">강민진</div>
-                    <div class="member-name">박송희</div>
-                    <div class="member-name">박시은</div>
-                    <div class="member-name">장서연</div>
-                    <div class="member-name">장영웅</div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <h2 class="info">Info</h2>
+            <div class="info-grid">
+                <div class="info-category committee">
+                    <div class="info-title">졸업전시위원</div>
+                    <div class="member-list">
+                        <div class="member-name">김혜민</div>
+                        <div class="member-name">박성욱</div>
+                        <div class="member-name">박소현</div>
+                        <div class="member-name">윤해주</div>
+                        <div class="member-name variant-1">김영영</div>
+                    </div>
                 </div>
-            </div>
-            <div class="info-category small-banner-team">
-                <div class="info-subtitle">소형배너</div>
-                <div class="member-list">
-                    <div class="member-name">서유정</div>
-                    <div class="member-name">송예준</div>
-                    <div class="member-name">이민준</div>
+                <div class="info-category web-team">
+                    <div class="info-subtitle">웹</div>
+                    <div class="member-list">
+                        <div class="member-name">강민진</div>
+                        <div class="member-name">박송희</div>
+                        <div class="member-name">박시은</div>
+                        <div class="member-name">장서연</div>
+                        <div class="member-name">장영웅</div>
+                    </div>
                 </div>
-            </div>
-            <div class="info-category large-banner-team">
-                <div class="info-subtitle">대형배너</div>
-                <div class="member-list">
-                    <div class="member-name">권한별</div>
-                    <div class="member-name">조예빈</div>
+                <div class="info-category small-banner-team">
+                    <div class="info-subtitle">소형배너</div>
+                    <div class="member-list">
+                        <div class="member-name">서유정</div>
+                        <div class="member-name">송예준</div>
+                        <div class="member-name">이민준</div>
+                    </div>
                 </div>
-            </div>
-            <div class="info-category video-team">
-                <div class="info-subtitle">영상</div>
-                <div class="member-list short">
-                    <div class="member-name variant-2">고영인</div>
-                    <div class="member-name variant-2">박성민</div>
-                    <div class="member-name variant-2">이상훈</div>
+                <div class="info-category large-banner-team">
+                    <div class="info-subtitle">대형배너</div>
+                    <div class="member-list">
+                        <div class="member-name">권한별</div>
+                        <div class="member-name">조예빈</div>
+                    </div>
+                </div>
+                <div class="info-category video-team">
+                    <div class="info-subtitle">영상</div>
+                    <div class="member-list">
+                        <div class="member-name variant-2">고영인</div>
+                        <div class="member-name variant-2">박성민</div>
+                        <div class="member-name variant-2">이상훈</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -399,10 +407,10 @@
 
         // 'About' 섹션이 보이기 시작할 때 포스터 애니메이션을 한 번에 실행합니다.
         gsap.timeline({
-            scrollTrigger: {
-                trigger: ".about", // '.about' 요소가 트리거가 됩니다.
-                start: "top 80%", // '.about' 요소의 상단이 뷰포트의 80% 지점에 닿을 때 시작
-                toggleActions: "play none none reverse", // 스크롤을 내릴 때 재생, 올릴 때 역재생
+            scrollTrigger: { // 데스크톱에서만 실행되도록 미디어쿼리 추가
+                trigger: ".about-section",
+                start: "top 60%",
+                toggleActions: "play none none reverse",
             }
         })
         .to(".rectangle-98", {
