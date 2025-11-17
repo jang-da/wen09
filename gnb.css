@@ -35,7 +35,7 @@
 .gnb-right {
   display: flex;
   align-items: center; /* 아이콘들을 수직 중앙에 정렬 */
-  gap: 30px; /* 메뉴 아이템 사이 간격 */
+  gap: 80px; /* 메뉴 아이템 사이 간격 */
 }
 
 /* GNB 오른쪽 메뉴 아이콘 스타일 */
@@ -71,7 +71,7 @@
     height: 50px; /* 로고 높이를 50px로 줄입니다. */
   }
   .nav-icon {
-    height: 26px; /* 메뉴 아이콘 높이를 28px로 줄입니다. */
+    height: 24px; /* 메뉴 아이콘 높이를 28px로 줄입니다. */
   }
 }
 
@@ -91,3 +91,9 @@
     gap: 20px; /* 메뉴 아이템 사이 간격을 20px로 줄입니다. */
   }
 }
+.gnb-right img{
+  width: 20px;
+  height: auto;
+  padding-left: 10px;
+}
+
