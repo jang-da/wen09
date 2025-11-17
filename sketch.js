@@ -42,7 +42,7 @@ function setup() {
   // 3개의 자동 파동을 서로 다른 시간 간격으로 생성하여 불규칙한 느낌을 줍니다.
   // setInterval(createAutoRipple, 2000);  // 2초마다 (주석 처리하여 파동 수 줄임)
   // setInterval(createAutoRipple, 2700);  // 2.7초마다 (주석 처리하여 파동 수 줄임)
-  setInterval(createAutoRipple, 6000);  // 4초마다 파동을 생성하여 빈도를 줄입니다.
+  setInterval(createAutoRipple, 3000);  // 4초마다 파동을 생성하여 빈도를 줄입니다.
 }
 
 // 이미지의 픽셀을 분석하여 파티클을 생성하는 함수
@@ -61,7 +61,7 @@ function initializeParticles() {
   
   // 파티클 밀도 설정 (모바일에서 더 촘촘하게)
   // stepSize 값이 클수록 파티클 밀도가 낮아집니다.
-  const stepSize = window.innerWidth < BREAKPOINT ? 60 : 35; // 데스크톱 stepSize를 30 -> 35로 늘려 파티클 수를 더 줄임
+  const stepSize = window.innerWidth < BREAKPOINT ? 60 : 24; // 데스크톱 stepSize를 30 -> 35로 늘려 파티클 수를 더 줄임
 
   // 스케일링된 이미지를 캔버스 중앙에 배치하기 위한 시작점을 계산합니다.
   const startX = (width - scaledWidth) / 2;
@@ -148,7 +148,7 @@ function mousePressed() {
     y: mouseY,
     radius: 0,      // 시작 반지름
     speed: random(2, 8), // 2에서 8 사이의 랜덤한 속도
-    rippleWidth: 10 // 파동의 두께
+    rippleWidth: 40 // 파동의 두께
   });
 }
 
@@ -164,8 +164,8 @@ function createAutoRipple() {
     x: random(width),      // 캔버스 너비 내의 랜덤 x좌표
     y: random(height),     // 캔버스 높이 내의 랜덤 y좌표
     radius: 0,
-    speed: random(3, 3),   // 자동 파동은 약간 느린 속도로 설정
-    rippleWidth: 15        // 자동 파동의 두께
+    speed: random(3, 9),   // 자동 파동은 약간 느린 속도로 설정
+    rippleWidth: 29        // 자동 파동의 두께
   });
 }
 
@@ -184,7 +184,7 @@ class Particle {
     this.maxForce = 0.2; // 최대 힘 (방향 전환)
 
     // --- 폰트 크기 설정 ---
-    this.baseSize = 12;       // 1. 기본 폰트 크기
+    this.baseSize = 14;       // 1. 기본 폰트 크기
     this.rippleEffectSize = 16; // 2. 파동이 닿았을 때 추가되는 최대 크기
     // -----------------------
   }
