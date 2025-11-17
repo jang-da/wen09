@@ -3,35 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025 폴리텍 서울 정수캠퍼스 시각디자인과 졸업전시회</title>
+    <title><CODE></CODE></title>
     <link rel="stylesheet" href="intro.css">
 </head>
 <body>
     <!-- Intro Animation Container -->
     <div id="intro-container">
       <!-- Top Panel (Z-index: 20) -->
-      <div id="panelTop">
+      <div id="panelTop" style="display: flex; align-items: flex-end;">
         <!-- 1단계 텍스트를 감싸는 div -->
-        <div class="text-wrapper">
+        <div class="text-wrapper-top" style="text-align: center; width: 100%; padding-bottom: 2rem;">
           <!-- 1단계 텍스트 요소 -->
           <span id="text1">2025 졸업전시에</span>
-          <!-- 2단계 텍스트 요소 (추가) -->
+        </div>
+      </div>
+
+      <!-- 2단계 텍스트 컨테이너 (z-40) -->
+      <div id="textContainer">
+        <div class="final-text-group">
+          <span id="codeText">CODE</span>
+          <span id="slashText">/</span>
+          <span id="projectText">PROJECT</span>
         </div>
       </div>
 
       <!-- Bottom Panel (Z-index: 20) -->
-      <div id="panelBottom">
-        <div class="text-wrapper-bottom">
+      <div id="panelBottom" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 1rem 0;">
+        <div class="text-wrapper-bottom" style="width: 100%; text-align: center; padding-top: 2rem;">
           <span id="text2">당신을 초대합니다</span>
         </div>
         <div id="loadingPercentage">(0%)</div>
-      </div>
-
-      <!-- 2단계 텍스트 컨테이너 (추가) -->
-      <div id="stage2-text-container">
-        <span id="code-text">CODE</span>
-        <span id="divider-text">/</span>
-        <span id="project-text">PROJECT</span>
       </div>
 
       <!-- 로딩 바 컨테이너 (Z-index: 30) -->

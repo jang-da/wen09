@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 0);
   
     // 2. 텍스트 페이드 아웃
-    tl.to("#text1", { duration: 0.5, opacity: 0, y: -20, ease: "power1.in" }, "-=0.5");
-    tl.to("#text2", {
+    tl.to(["#text1", "#text2"], {
       duration: 0.5,
       opacity: 0,
-      y: 20, // 아래로 내려가며 사라지도록 y 값을 양수로 변경
+      y: -20,
+      stagger: 0.1,
       ease: "power1.in"
     }, "-=0.5"); // 로딩이 끝나기 0.5초 전에 시작
   
@@ -48,7 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: "power3.inOut"
     }, "<");
   
-
+    // 4. CODE / PROJECT 텍스트 나타나는 애니메이션
+    tl.from(["#codeText", "#slashText", "#projectText"], {
+      duration: 0.8,
+      opacity: 0,
+      y: 20,
+      stagger: 0.2,
+      ease: "power2.out"
+    }, "-=0.5"); // 패널이 갈라지는 중간에 시작
   
     // 5. 인트로 전체가 사라지고 메인 페이지로 이동
     tl.to("#intro-container", {
