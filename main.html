@@ -399,14 +399,14 @@
             top: 0;
             right: 0; /* 오른쪽 기준으로 위치 */
             width: min(80vw, 350px); /* 화면 너비의 80% 또는 최대 350px 너비 */
-            height: 100%;
-            background-color: rgba(220, 0, 0, 0.95);
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95); /* 배경색을 다시 검은색 계열로 수정 */
             z-index: 1000;
             flex-direction: column;
-            justify-content: center; /* 메뉴 항목들을 수직 중앙에 배치합니다. */
+            justify-content: flex-start; /* 메뉴 항목들을 위에서부터 정렬합니다. */
             align-items: center;
-            gap: 50px; /* 메뉴 아이템 간의 간격을 늘립니다. */
-                        padding-top: 50vh; /* 화면 상단에서 30%만큼 아래에 메뉴를 배치합니다. */
+            padding-top: 150px; /* 패널 상단에서부터의 여백을 150px로 설정합니다. */
+            gap: 50px; /* 메뉴 아이템 간의 간격을 설정합니다. */
             /* 슬라이드 애니메이션을 위한 초기 상태 설정 */
             transform: translateX(100%); /* 화면 오른쪽 밖에 위치 */
             opacity: 0;
