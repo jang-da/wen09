@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 0);
   
     // 2. 텍스트 페이드 아웃
-    tl.to(["#text1", "#text2"], {
+    tl.to("#text1", { duration: 0.5, opacity: 0, y: -20, ease: "power1.in" }, "-=0.5");
+    tl.to("#text2", {
       duration: 0.5,
       opacity: 0,
-      y: -20,
-      stagger: 0.1,
+      y: 20, // 아래로 내려가며 사라지도록 y 값을 양수로 변경
       ease: "power1.in"
-    }, "-=0.5"); // 로딩이 끝나기 0.5초 전에 시작
+    }, "<0.1"); // #text1 애니메이션 시작 0.1초 후에 시작 (stagger 효과 재현)
   
     // 3. 패널(상/하단)이 갈라지는 애니메이션
     tl.to("#panelTop", {

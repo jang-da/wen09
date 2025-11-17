@@ -90,9 +90,10 @@ body, html {
 
 /* 로딩 관련 요소 */
 #loadingPercentage {
-    font-size: 0.875rem;
+    font-size: 1.25rem; /* 폰트 크기를 키웁니다. */
     font-family: monospace;
-    color: rgba(255, 255, 255, 0.5);
+    font-weight: 700; /* 폰트를 굵게 만듭니다. */
+    color: rgb(255, 255, 255);
 }
 
 #loadingContainer {
