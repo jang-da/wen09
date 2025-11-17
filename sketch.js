@@ -61,7 +61,7 @@ function initializeParticles() {
   
   // 파티클 밀도 설정 (모바일에서 더 촘촘하게)
   // stepSize 값이 클수록 파티클 밀도가 낮아집니다.
-  const stepSize = window.innerWidth < BREAKPOINT ? 60 : 24; // 데스크톱 stepSize를 30 -> 35로 늘려 파티클 수를 더 줄임
+  const stepSize = window.innerWidth < BREAKPOINT ? 57 : 24; // 데스크톱 stepSize를 30 -> 35로 늘려 파티클 수를 더 줄임
 
   // 스케일링된 이미지를 캔버스 중앙에 배치하기 위한 시작점을 계산합니다.
   const startX = (width - scaledWidth) / 2;
@@ -180,12 +180,12 @@ class Particle {
 
     // 사용자가 요청한 '0' 또는 '1' 문자를 랜덤하게 선택합니다.
     this.char = random() > 0.5 ? "0" : "1";
-    this.maxSpeed = 3; // 최대 속도
+    this.maxSpeed = 5; // 최대 속도
     this.maxForce = 0.2; // 최대 힘 (방향 전환)
 
     // --- 폰트 크기 설정 ---
     this.baseSize = 14;       // 1. 기본 폰트 크기
-    this.rippleEffectSize = 16; // 2. 파동이 닿았을 때 추가되는 최대 크기
+    this.rippleEffectSize = 18; // 2. 파동이 닿았을 때 추가되는 최대 크기
     // -----------------------
   }
 
@@ -238,8 +238,8 @@ class Particle {
         
         // 크기와 흔들림 값을 적용합니다.
         size += this.rippleEffectSize * effect; // 최대 크기 증가
-        shakeX = random(-5, 5) * effect;
-        shakeY = random(-5, 5) * effect;
+        shakeX = random(-5, 10) * effect;
+        shakeY = random(-5, 10) * effect;
       }
     }
 

@@ -63,8 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
       opacity: 0,
       delay: 0.5, // 최종 텍스트를 잠시 보여주기 위한 딜레이
       onComplete: () => {
-        // 애니메이션이 끝나면 index.html로 페이지를 이동합니다.
-        window.location.href = 'main.html';
+        // 인트로를 봤다는 표시를 세션 스토리지에 저장합니다.
+        sessionStorage.setItem('introSeen', 'true');
+
+        // 원래 가려던 페이지가 있으면 그곳으로, 없으면 main.html로 이동합니다.
+        const intendedPage = sessionStorage.getItem('intendedPage') || 'main.html';
+        sessionStorage.removeItem('intendedPage'); // 사용 후 삭제
+        window.location.href = intendedPage;
       }
     });
 });

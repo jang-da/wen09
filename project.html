@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <script>
+        // 인트로를 본 적이 없으면, 현재 페이지를 저장하고 인트로 페이지로 이동합니다.
+        if (!sessionStorage.getItem('introSeen')) {
+            sessionStorage.setItem('intendedPage', window.location.pathname.split('/').pop());
+            window.location.replace('index.html');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CODE. 프로필</title>

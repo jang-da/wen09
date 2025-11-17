@@ -23,7 +23,7 @@ body, html {
     left: 0;
     width: 100%;
     height: 50%;
-    background-color: #0d9488; /* Tailwind teal-600 */
+    background-color: #161618; /* Tailwind teal-600 */
     z-index: 20;
     overflow: hidden;
 }
@@ -35,7 +35,7 @@ body, html {
     left: 0;
     width: 100%;
     height: 50%;
-    background-color: #0d9488; /* Tailwind teal-600 */
+    background-color: #161618; /* Tailwind teal-600 */
     z-index: 20;
     display: flex;
     align-items: flex-end;
