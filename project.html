@@ -37,18 +37,12 @@
             background: var(--c-black);
             color: #A8D5E2;
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            padding-top: 91px; /* Adjusted for GNB height */
+            -webkit-font-smoothing: antialiased; /* GNB 높이가 커졌으므로 padding-top 조정 */
+            padding-top: 85px;
             
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-        }
-
-        /* GNB 스크롤 시 경계선 제거 (이 페이지에만 적용) */
-        .gnb.scrolled {
-            border-bottom-color: transparent;
-            box-shadow: none;
         }
 
         /* 메인 컨텐츠 래퍼 (추가) */
@@ -76,9 +70,9 @@
             padding: 25px 0;
             border-bottom: 1px solid var(--c-dark-gray-2);
             position: sticky;
-            top: 90px; /* GNB 높이에 맞춰 간격 제거 */
+            top: 84px; /* GNB 높이에 맞춰 간격 조정 */
             z-index: 900;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            /* box-shadow: 0 4px 12px rgba(0,0,0,0.05); */ /* GNB와 겹쳐보이는 그림자 제거 */
         }
 
         .filter-nav {
@@ -537,32 +531,7 @@
               }
             });
 
-            // --- GNB 호버 애니메이션 스크립트 ---
-            (function(){
-                const links = document.querySelectorAll('.gnb-right a');
-                links.forEach(a => {
-                    a.addEventListener('mouseenter', () => {
-                        a.classList.remove('gnb-before-exit');
-                        void a.offsetWidth;
-                        a.classList.add('gnb-before-fill');
-                    });
-                    a.addEventListener('mouseleave', () => {
-                        a.classList.remove('gnb-before-fill');
-                        void a.offsetWidth;
-                        a.classList.add('gnb-before-exit');
-                        const onEnd = (e) => {
-                            if (e.propertyName === 'left') {
-                                a.classList.add('gnb-before-hidden');
-                                a.classList.remove('gnb-before-exit');
-                                void a.offsetWidth;
-                                a.classList.remove('gnb-before-hidden');
-                                a.removeEventListener('transitionend', onEnd);
-                            }
-                        };
-                        a.addEventListener('transitionend', onEnd);
-                    });
-                });
-            })();
+            // --- [REMOVED] GNB 호버 애니메이션 스크립트 제거 ---
         });
     </script>
 </body>

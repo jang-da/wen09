@@ -17,10 +17,23 @@
         padding: 0;
         width: 100%;
         /* height: 100%; */ /* 스크롤을 위해 제거 */
-        background-color: #141217; /* 배경색을 검정색으로 변경 */
+        background-color: #000000; /* 배경색을 검정색으로 변경 */
         color: #A8D5E2;
         font-family: 'Source Code Pro', 'Noto Sans KR', sans-serif;
         }
+
+        /* main.html의 GNB에도 블러 효과 추가 */
+        .gnb {
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px);
+        }
+
+
+        /* main.html에서만 스크롤 시 GNB 경계선 표시 */
+        .gnb.scrolled {
+            border-bottom-color: #A8D5E2;
+        }
+
 
         #canvas-container {
             position: relative;
@@ -111,7 +124,9 @@
         }
 
         .about-text-row.align-right {
-            align-items: flex-end; /* 오른쪽 정렬 */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; /* 오른쪽 정렬로 변경 */
             align-self: stretch; /* 부모 컨테이너의 전체 너비를 차지하도록 설정 */
             margin-top: -80px; /* 위쪽 텍스트 그룹과의 간격을 음수 값으로 조정 */
         }
@@ -131,6 +146,7 @@
         }
 
         .encoding {
+            text-align: right; /* 오른쪽 정렬로 변경 */
             color: #60d5f3;
             font-family: "NotoSansKr-Light", 'Noto Sans KR', sans-serif;
             font-size: 24px;
@@ -138,6 +154,7 @@
         }
 
         .about-subtitle-2 {
+            text-align: right; /* 오른쪽 정렬로 변경 */
             color: #ffffff;
             font-family: "NotoSansKr-Medium", 'Noto Sans KR', sans-serif;
             font-size: 44.81px;
@@ -152,6 +169,7 @@
             font-weight: 400;
             margin-top: 0; /* 기존 margin-top 제거 */
             text-indent: 4em; /* 들여쓰기 적용 */
+            min-height: 1.2em; /* 애니메이션 중 텍스트 깜박임 방지 */
         }
 
 
@@ -351,7 +369,10 @@
     <header class="gnb">
       <div class="gnb-inner">
         <div class="gnb-left">
-          <a href="index.html"><img src="images/logo.svg" alt="Logo" class="logo"></a>
+          <a href="index.html">
+            <div class="logo-container">
+              <img src="images/logo.svg" alt="Logo" class="logo logo-default"><img src="images/logo_blue.svg" alt="Logo Hover" class="logo logo-hover">
+            </div></a>
         </div>
         <nav class="gnb-right">
           <a href="project.html">Projects<img src="images/arrow icon.svg" alt="Project" class="nav-icon"></a>
@@ -381,13 +402,10 @@
                         <div class="about-subtitle-2">시각으로 답하다</div>
                     </div>
                     <p class="about-description">
-                        세상은 수많은 이야기와 정보, 그리고 보이지 않는 문제들로 가득 찬 거대한
-                        텍스트입니다. 저희는 그 텍스트를 읽고, 해석하고, 우리만의 언어로 새로운
-                        의미를 만들어내는 사람들, 바로 시각 디자이너입니다.
-                    </p>
+                        <span>세상은 수많은 이야기와 정보, 그리고 보이</span><br><span>지 않는 문제들로 가득 찬 거대한 텍스트입니다. 저희</span><br><span>는 그 텍스트를 읽고, 해석하고, 우리만의 언어로 새</span><br><span>로운 의미를 만들어내는 사람들, 바로시각 디자이너<span>입니다.</span>
+                    </p><br><br>
                     <p class="about-description">
-                        이번 졸업 작품은 ‘세상을 그리는 방식’에 대한 저희의 대답입니다.
-                        이는 단순히 아름다운 것을 만드는 행위를 넘어, 복잡한 세상을 이해하고 그 문제에 대한 해결책을 시각적으로 제안하는 과정에 대한 이야기입니다.
+                        <span>이번 졸업 작품은 '세상을 그리는 방식'에 </span><br><span>대한 저희의 대답입니다. 이는 단순히 아름다운 것을 </span><br><span>만드는 행위를 넘어, 복잡한 세상을 이해하고 그 문제</span><br><span>에 대한 해결책을 시각적으로 제안하는 과정에 대한 </span><br><span>이야기입니다.</span>
                     </p>
                 </div>
             </div>
@@ -548,6 +566,106 @@
                     });
                 });
             })();
+
+        // --- Typing Animation for about-text-row ---
+        (function(){
+            const textRows = document.querySelectorAll('.about-text-row');
+            const typingSpeed = 120; // 밀리초 단위
+
+            function typeTextRows(rowElement) {
+                const children = Array.from(rowElement.children);
+                const childStates = children.map(child => ({
+                    element: child,
+                    originalText: child.textContent,
+                    charIndex: 0
+                }));
+
+                // 모든 자식 요소를 초기화
+                childStates.forEach(state => {
+                    state.element.textContent = '';
+                });
+
+                function typeAllChildren() {
+                    let allComplete = true;
+
+                    childStates.forEach(state => {
+                        if (state.charIndex < state.originalText.length) {
+                            allComplete = false;
+                            state.element.textContent += state.originalText.charAt(state.charIndex);
+                            state.charIndex++;
+                        }
+                    });
+
+                    if (!allComplete) {
+                        setTimeout(typeAllChildren, typingSpeed);
+                    }
+                }
+
+                typeAllChildren();
+            }
+
+            // about-section이 보이기 시작할 때 typing 애니메이션 시작
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".about-section",
+                    start: "top 60%",
+                    once: true,
+                }
+            })
+            .add(() => {
+                textRows.forEach(row => typeTextRows(row));
+            }, 0);
+        })();
+
+        // --- Typing Animation for about-description ---
+        (function(){
+            const descriptions = document.querySelectorAll('.about-description');
+            const typingSpeed = 30; // 밀리초 단위
+
+            function typeSpans(descElement) {
+                const spans = descElement.querySelectorAll('span');
+                const spanStates = Array.from(spans).map(span => ({
+                    element: span,
+                    originalText: span.textContent,
+                    charIndex: 0
+                }));
+
+                // 모든 span을 초기화
+                spanStates.forEach(state => {
+                    state.element.textContent = '';
+                });
+
+                function typeAllSpans() {
+                    let allComplete = true;
+
+                    spanStates.forEach(state => {
+                        if (state.charIndex < state.originalText.length) {
+                            allComplete = false;
+                            state.element.textContent += state.originalText.charAt(state.charIndex);
+                            state.charIndex++;
+                        }
+                    });
+
+                    if (!allComplete) {
+                        setTimeout(typeAllSpans, typingSpeed);
+                    }
+                }
+
+                typeAllSpans();
+            }
+
+            // about-section이 보이기 시작할 때 typing 애니메이션 시작
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".about-section",
+                    start: "top 60%",
+                    once: true,
+                }
+            })
+            .add(() => {
+                descriptions.forEach(desc => typeSpans(desc));
+            }, 0);
+        })();
 
     </script>
 </body>
