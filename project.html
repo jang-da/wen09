@@ -317,6 +317,79 @@
         @media (max-width: 480px) {
             .filter-item { font-size: 0.9rem; }
         }
+
+        /* --- GNB 모바일 메뉴 스타일 --- */
+        .gnb-mobile-menu-button {
+            display: none; /* 평소에는 숨김 */
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001; /* 메뉴 패널보다 위에 위치 */
+        }
+
+        .gnb-mobile-menu-button .icon-hamburger,
+        .gnb-mobile-menu-button .icon-close {
+            width: 24px;
+            height: 24px;
+            stroke: #A8D5E2; /* 아이콘 색상 */
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        .gnb-mobile-menu-button .icon-close {
+            display: none;
+        }
+
+        .gnb-mobile-panel {
+            display: flex; /* 항상 flex 상태를 유지하여 transition이 가능하도록 합니다. */
+            position: fixed;
+            top: 0;
+            right: 0; /* 오른쪽 기준으로 위치 */
+            width: min(80vw, 350px); /* 화면 너비의 80% 또는 최대 350px 너비 */
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95); /* 배경색을 다시 검은색 계열로 수정 */
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: flex-start; /* 메뉴 항목들을 위에서부터 정렬합니다. */
+            align-items: flex-start; /* 메뉴 항목들을 왼쪽으로 정렬합니다. */
+            padding-top: 60px; /* 패널 상단에서부터의 여백을 150px로 설정합니다. */
+            padding-left: 20px; /* 패널 왼쪽에 40px 여백을 추가합니다. */
+            gap: 40px;
+            transform: translateX(100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease, visibility 0.4s;
+        }
+
+        .gnb-mobile-panel.is-open {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .gnb-mobile-panel a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            color: #A8D5E2;
+            text-decoration: none !important;
+            font-weight: 500;
+        }
+
+        .gnb-mobile-panel .nav-icon {
+            height: 1.5rem;
+            filter: brightness(0) invert(1);
+            opacity: 0.7;
+            transform: translateY(1px);
+        }
+
+        @media (max-width: 1279px) {
+            .gnb-right { display: none; }
+            .gnb-mobile-menu-button { display: block; }
+            .gnb-mobile-menu-button { transform: translateY(2px); }
+        }
     </style>
 </head>
 <body>
@@ -325,11 +398,24 @@
     <header class="gnb">
       <div class="gnb-inner">
         <div class="gnb-left">
-          <a href="index.html"><img src="images/logo.svg" alt="Logo" class="logo"></a>
+          <a href="index.html">
+            <div class="logo-container">
+              <img src="images/logo.svg" alt="Logo" class="logo logo-default"><img src="images/logo_blue.svg" alt="Logo Hover" class="logo logo-hover">
+            </div></a>
         </div>
         <nav class="gnb-right">
           <a href="project.html" class="active">Projects<img src="images/arrow icon.svg" alt="Project" class="nav-icon"></a>
           <a href="profile.html">Artist<img src="images/arrow icon.svg" alt="Artist" class="nav-icon"></a>
+        </nav>
+        <!-- 모바일용 햄버거 메뉴 버튼 -->
+        <button class="gnb-mobile-menu-button" aria-label="메뉴 열기/닫기">
+            <svg class="icon-hamburger" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            <svg class="icon-close" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <!-- 모바일 메뉴 패널 -->
+        <nav class="gnb-mobile-panel">
+            <a href="project.html">Projects<img src="images/arrow icon.svg" alt="Project" class="nav-icon"></a>
+            <a href="profile.html">Artist<img src="images/arrow icon.svg" alt="Artist" class="nav-icon"></a>
         </nav>
       </div>
     </header>
@@ -531,7 +617,33 @@
               }
             });
 
-            // --- [REMOVED] GNB 호버 애니메이션 스크립트 제거 ---
+            // --- GNB 호버 애니메이션 스크립트 ---
+            // (function(){ ... GNB 호버 애니메이션 코드 ... })(); // 이 부분은 이미 내부에 있습니다.
+        });
+
+        // --- GNB 모바일 메뉴 스크립트 ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.querySelector('.gnb-mobile-menu-button');
+            const mobilePanel = document.querySelector('.gnb-mobile-panel');
+            const iconHamburger = menuButton.querySelector('.icon-hamburger');
+            const iconClose = menuButton.querySelector('.icon-close');
+            const body = document.body;
+
+            menuButton.addEventListener('click', () => {
+                const isOpen = mobilePanel.classList.toggle('is-open');
+                
+                if (isOpen) {
+                    iconHamburger.style.display = 'none';
+                    iconClose.style.display = 'block';
+                    // 스크롤 방지
+                    body.style.overflow = 'hidden';
+                } else {
+                    iconHamburger.style.display = 'block';
+                    iconClose.style.display = 'none';
+                    // 스크롤 허용
+                    body.style.overflow = '';
+                }
+            });
         });
     </script>
 </body>
