@@ -32,34 +32,6 @@
             display: block;
         }
 
-        /* --- GNB 메뉴 스타일 (main.html 전용) --- */
-        .gnb-right .nav-icon {
-            height: 24px; /* 텍스트 크기에 맞춰 아이콘 높이를 조정합니다. */
-            filter: brightness(0) invert(1); /* 아이콘 색상을 흰색으로 유지합니다. */
-            transition: filter 0.3s ease;
-        }
-
-        .gnb-right a {
-            display: flex; /* 아이콘과 텍스트를 정렬하기 위해 flex 사용 */
-            align-items: center; /* 수직 중앙 정렬 */
-            justify-content: center; /* 가로 중앙 정렬을 추가합니다. */
-            gap: 12px; /* 아이콘과 텍스트 사이 간격 */
-            text-decoration: none; /* 밑줄 제거 */
-            color: #A8D5E2; /* 기본 텍스트 색상 */
-            font-size: 28px; /* 폰트 크기를 24px로 키웁니다. */
-            font-weight: 350; /* 폰트 두께 설정 */
-            transition: color 0.3s ease; /* 색상 변경 시 부드러운 효과 */
-        }
-
-        .gnb-right a:hover {
-            color: #FF4A28; /* 호버 시 텍스트 색상 변경 */
-        }
-
-        .gnb-right a:hover .nav-icon {
-            /* 호버 시 아이콘 색상을 텍스트와 동일한 계열로 변경 */
-            filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(346deg) brightness(99%) contrast(103%);
-        }
-
         #main-content {
             position: relative;
             z-index: 1;
@@ -379,7 +351,7 @@
     <header class="gnb">
       <div class="gnb-inner">
         <div class="gnb-left">
-          <a href="index.html"><img src="gnbimg/logo7.png" alt="Logo" class="logo"></a>
+          <a href="index.html"><img src="images/logo.svg" alt="Logo" class="logo"></a>
         </div>
         <nav class="gnb-right">
           <a href="project.html">Projects<img src="images/arrow icon.svg" alt="Project" class="nav-icon"></a>
@@ -529,8 +501,7 @@
             ease: "power1.inOut",
             duration: 1.2
         });
-
-        // --- GNB 스크롤 효과 스크립트 ---
+    // --- GNB 스크롤 효과 스크립트 ---
         const gnb = document.querySelector('.gnb');
         let lastScrollY = window.scrollY;
 
@@ -542,6 +513,42 @@
             gnb.classList.remove('scrolled');
           }
         });
+    </script>
+        <script>
+            // Control the ::before fill/exit animation so exit animates left->right
+            (function(){
+                const links = document.querySelectorAll('.gnb-right a');
+                links.forEach(a => {
+                    a.addEventListener('mouseenter', () => {
+                        a.classList.remove('gnb-before-exit');
+                        // force reflow in case of rapid hover changes
+                        void a.offsetWidth;
+                        a.classList.add('gnb-before-fill');
+                    });
+                    a.addEventListener('mouseleave', () => {
+                        // start exit animation (move pseudo-element to right)
+                        a.classList.remove('gnb-before-fill');
+                        // force reflow
+                        void a.offsetWidth;
+                        a.classList.add('gnb-before-exit');
+                        // after exit transition ends, snap the pseudo-element to off-left
+                        const onEnd = (e) => {
+                            if (e.propertyName === 'left') {
+                                // add a hidden class to set left:-100% with no transition
+                                a.classList.add('gnb-before-hidden');
+                                // remove the exit class (no visible animation because hidden disables transition)
+                                a.classList.remove('gnb-before-exit');
+                                // force reflow and then remove hidden so future hovers animate normally
+                                void a.offsetWidth;
+                                a.classList.remove('gnb-before-hidden');
+                                a.removeEventListener('transitionend', onEnd);
+                            }
+                        };
+                        a.addEventListener('transitionend', onEnd);
+                    });
+                });
+            })();
+
     </script>
 </body>
 </html>

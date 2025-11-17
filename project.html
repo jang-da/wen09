@@ -331,11 +331,11 @@
     <header class="gnb">
       <div class="gnb-inner">
         <div class="gnb-left">
-          <a href="index.html"><img src="gnbimg/logo7.png" alt="Logo" class="logo"></a>
+          <a href="index.html"><img src="images/logo.svg" alt="Logo" class="logo"></a>
         </div>
         <nav class="gnb-right">
-          <a href="project.html" class="active"><img src="gnbimg/projects.png" alt="Project" class="nav-icon"></a>
-          <a href="profile.html"><img src="gnbimg/artist.png" alt="Artist" class="nav-icon"></a>
+          <a href="project.html" class="active">Projects<img src="images/arrow icon.svg" alt="Project" class="nav-icon"></a>
+          <a href="profile.html">Artist<img src="images/arrow icon.svg" alt="Artist" class="nav-icon"></a>
         </nav>
       </div>
     </header>
@@ -536,6 +536,33 @@
                 gnb.classList.remove('scrolled');
               }
             });
+
+            // --- GNB 호버 애니메이션 스크립트 ---
+            (function(){
+                const links = document.querySelectorAll('.gnb-right a');
+                links.forEach(a => {
+                    a.addEventListener('mouseenter', () => {
+                        a.classList.remove('gnb-before-exit');
+                        void a.offsetWidth;
+                        a.classList.add('gnb-before-fill');
+                    });
+                    a.addEventListener('mouseleave', () => {
+                        a.classList.remove('gnb-before-fill');
+                        void a.offsetWidth;
+                        a.classList.add('gnb-before-exit');
+                        const onEnd = (e) => {
+                            if (e.propertyName === 'left') {
+                                a.classList.add('gnb-before-hidden');
+                                a.classList.remove('gnb-before-exit');
+                                void a.offsetWidth;
+                                a.classList.remove('gnb-before-hidden');
+                                a.removeEventListener('transitionend', onEnd);
+                            }
+                        };
+                        a.addEventListener('transitionend', onEnd);
+                    });
+                });
+            })();
         });
     </script>
 </body>
