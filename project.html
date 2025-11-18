@@ -10,7 +10,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CODE. 프로필</title>
+    <title>CODE. Profile</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+KR:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
@@ -633,7 +633,31 @@
             });
 
             // --- GNB 호버 애니메이션 스크립트 ---
-            // (function(){ ... GNB 호버 애니메이션 코드 ... })(); // 이 부분은 이미 내부에 있습니다.
+            (function(){
+                const links = document.querySelectorAll('.gnb-right a');
+                links.forEach(a => {
+                    a.addEventListener('mouseenter', () => {
+                        a.classList.remove('gnb-before-exit');
+                        void a.offsetWidth;
+                        a.classList.add('gnb-before-fill');
+                    });
+                    a.addEventListener('mouseleave', () => {
+                        a.classList.remove('gnb-before-fill');
+                        void a.offsetWidth;
+                        a.classList.add('gnb-before-exit');
+                        const onEnd = (e) => {
+                            if (e.propertyName === 'left') {
+                                a.classList.add('gnb-before-hidden');
+                                a.classList.remove('gnb-before-exit');
+                                void a.offsetWidth;
+                                a.classList.remove('gnb-before-hidden');
+                                a.removeEventListener('transitionend', onEnd);
+                            }
+                        };
+                        a.addEventListener('transitionend', onEnd);
+                    });
+                });
+            })();
         });
 
         // --- GNB 모바일 메뉴 스크립트 ---
