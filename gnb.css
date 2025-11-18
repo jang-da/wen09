@@ -18,7 +18,7 @@
 /* GNB 내부 콘텐츠 컨테이너 */
 .gnb-inner {
   width: 100%;
-  max-width: 1600px; /* 최대 너비를 1600px로 설정 */
+  max-width: 1500px; /* 최대 너비를 1600px로 설정 */
   margin: 0 auto; /* 중앙 정렬 */
   padding: 20px 40px; /* 상하 여백을 20px로 늘려 GNB 높이 확보 */
   display: flex;
@@ -44,7 +44,7 @@
 /* 화면 너비가 1279px 이하일 때 GNB 로고 및 아이콘 크기를 조정합니다. */
 @media (max-width: 1279px) {
   .gnb-inner {
-    padding: 10px 24px; /* 모바일 화면에서 좌우 여백을 줄입니다. */
+    padding: 15px 24px; /* 모바일/태블릿 화면의 상하 여백을 15px로 수정합니다. */
   }
   .gnb .logo {
     height: 20px; /* 로고 높이를 20px로 줄입니다. */
@@ -58,7 +58,7 @@
 /* 화면 너비가 375px 이하일 때 GNB 요소 크기를 추가로 조정합니다. */
 @media (max-width: 375px) {
   .gnb-inner {
-    padding: 10px 16px; /* 좌우 여백을 더 줄입니다. */
+    padding: 12px 16px; /* 상하 여백을 12px로 조정하여 높이를 맞춥니다. */
   }
   .gnb .logo {
     height: 18px; /* 로고 높이를 18px로 줄입니다. */

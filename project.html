@@ -21,7 +21,7 @@
             --c-white: #FFFFFF;
             --c-light-gray: #E4E7EC;
             --c-pale-blue: #BCD7DE;
-            --c-orange-red: #FF4A28;
+            --c-orange-red: #E63D1F;
             --c-dark-cocoa: #573722;
             --c-black: #000000;
             --c-dark-gray-2: #333333;
@@ -299,13 +299,20 @@
             }
         }
 
+        @media (max-width: 1279px) {
+            /* GNB 높이가 줄어드는 구간에 맞춰 body와 filter의 top 위치 조정 */
+            body { padding-top: 65px; } /* GNB 높이(약 65px)에 맞춤 */
+            .filter-section { top: 60px; } /* GNB 바로 아래에 붙도록 조정 */
+        }
+
         @media (max-width: 768px) {
-            body { padding-top: 61px; }
+            /* 1279px 이하 규칙과 동일하게 유지하여 일관성 확보 */
+            body { padding-top: 71px; }
             .site-header { padding: 15px 20px; }
             .site-header .logo a { font-size: 1.3rem; }
             .site-header nav a { font-size: 0.9rem; padding: 6px 12px; }
             .container { padding: 0 20px; }
-            .filter-section { top: 61px; padding: 20px 0; }
+            .filter-section { top: 60px; padding: 20px 0; }
             .filter-item { font-size: 1rem; padding: 6px 12px; }
             .profile-section { padding: 60px 0 80px; }
             .profile-grid { 
@@ -323,6 +330,7 @@
 
         @media (max-width: 480px) {
             .filter-item { font-size: 0.9rem; }
+            .filter-section { top: 48px; padding: 20px 0; }
         }
 
         /* --- GNB 모바일 메뉴 스타일 --- */
